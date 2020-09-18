@@ -4,28 +4,23 @@ import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 import paginationFactory, { PaginationProvider, PaginationTotalStandalone, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter'; 
-import {Modal, Button} from "react-bootstrap";
+import {Modal, Button, Image} from "react-bootstrap";
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import './style.css';
+import logo from './largeConference.jpg';
 
 //custom data
-const products = [{'id': 1, 'room': "Small Conference Room", 'date': "08-06-2018", 'name': "Mallory Norman",  'total': 545.60, 'status': "Confirmed"},
-{'id': 2, 'room': "Large Conference Room", 'date': "09-06-2018", 'name': "Dorothy Jacobs",  'total': 645.60, 'status': "Confirmed"},
-{'id': 3, 'room': "Panoramic Room", 'date': "08-07-2018", 'name': "Himaja",  'total': 445.20, 'status': "Pending"},
-{'id': 4, 'room': "Small Conference Room", 'date': "08-10-2018", 'name': "Deepak",  'total': 345.60, 'status': "Confirmed"},
-{'id': 5, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 6, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 7, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 8, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 9, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 10, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 11, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 12, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 13, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 14, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 15, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 16, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"},
-{'id': 17, 'room': "Large Conference Room", 'date': "18-06-2018", 'name': "Shubha",  'total': 245.60, 'status': "Pending"}];
+const products = [{'id': 1, 'image': '../../images/rooms/smallConference.jpg', 'room': "Small Conference Room 0", 'capacity': 5, 'bookings': 1, 'status': "Active"},
+{'id': 2, 'image': '../../images/rooms/largeConference.jpg', 'room': "Large Conference Room 0", 'capacity': 12, 'bookings': 1, 'status': "Active"},
+{'id': 3, 'image': '../../images/rooms/smallConference.jpg', 'room': "Small Conference Room 1", 'capacity': 6, 'bookings': 2, 'status': "Inactive"},
+{'id': 4, 'image': '../../images/rooms/largeConference.jpg', 'room': "Large Conference Room 1", 'capacity': 20, 'bookings': 1, 'status': "Active"},
+{'id': 5, 'image': '../../images/rooms/panoramic.jpg', 'room': "Panorama Room 0", 'capacity': 25, 'bookings': 2, 'status': "Inactive"},
+{'id': 6, 'image': '../../images/rooms/smallConference.jpg', 'room': "Small Conference Room 2", 'capacity': 8, 'bookings': 1, 'status': "Inactive"},
+{'id': 7, 'image': '../../images/rooms/smallConference.jpg', 'room': "Small Conference Room 3", 'capacity': 7, 'bookings': 2, 'status': "Active"},
+{'id': 8, 'image': '../../images/rooms/largeConference.jpg', 'room': "Large Conference Room 2", 'capacity': 18, 'bookings': 1, 'status': "Active"},
+{'id': 9, 'image': '../../images/rooms/smallConference.jpg', 'room': "Small Conference Room 4", 'capacity': 6, 'bookings': 3, 'status': "Inactive"},
+{'id': 10, 'image': '../../images/rooms/smallConference.jpg', 'room': "Small Conference Room 5", 'capacity': 5, 'bookings': 1, 'status': "Active"}
+];
 
 
 const { SearchBar } = Search;
@@ -36,9 +31,14 @@ const customTotalPagination = (from, to, size) => (
   </span>
 );
 
-function priceFormatter(cell, row) {
-  return `$ ${cell}`;
+function imageFormatter(cell, row) {
+  console.log(logo);
+    return (
+     // <Image src= '../../images/rooms/largeConferene.jpg/171x180' thumbnail/>
+     <Image src={logo} thumbnail />
+     );
 }
+
 
 const DeleteRow = (props) => {
 
@@ -106,39 +106,30 @@ const options = {
 };
 
 const columns = [{
+  dataField: 'image',
+  text: 'Image',
+  formatter: imageFormatter,
+  editable: false, 
+
+},  {
   dataField: 'room',
   text: 'Room',
-  editable: false, 
-}, {
-  dataField: 'date',
-  text: 'Date',
+  sort: true,
   editable: false,
-  sort: true,
-  sortFunc: (a, b, order, dataField, rowA, rowB) => { 
-    var date_a = a.split("-");
-    var date_b = b.split("-");
-    
-    if (order === 'asc')
-    {
-      return new Date(date_a[2], date_a[1], date_a[0]) - new Date(date_b[2], date_b[1], date_b[0])
-    }
-   else if (order === 'desc') {
-      return  new Date(date_b[2], date_b[1], date_b[0]) - new Date(date_a[2], date_a[1], date_a[0])
-    }
-}
 }, {
-  dataField: 'name',
-  text: 'Name',
-  sort: true,
-  editable: false
-},
-{
-    dataField: 'total',
-    formatter: (cell, row) => `$ ${cell}`,
-    text: 'Total',
+    dataField: 'capacity',
+    text: 'Capacity',
     sort: true,
     editable: false,
     searchable: false
+
+}, {
+  dataField: 'bookings',
+  text: 'Bookings',
+  sort: true,
+  editable: false,
+  searchable: false
+
 }, {
     dataField: 'status',
     text: 'Status',
@@ -150,11 +141,11 @@ const columns = [{
           console.log(`current editing row id: ${row.id}`);
           console.log(`current editing column: ${column.dataField}`);
           return [{
-            value: 'Pending',
-            label: 'Pending'
+            value: 'Inactive',
+            label: 'Inactive'
           }, {
-            value: 'Confirmed',
-            label: 'Confirmed'
+            value: 'Active',
+            label: 'Active'
           }];
         }
       }
@@ -189,7 +180,7 @@ export default () =>
           className="custome-search-field"
           style={ { color: 'black' }, {width: '500px'} }
           delay={ 1000 }
-          placeholder="Search for Room/ Name/ Date"
+          placeholder="Search for Room"
         />
         <hr />
         <BootstrapTable 

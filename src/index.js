@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import {Container,Row, Col} from 'react-bootstrap';
+import {Container,Row, Col, Image, Figure} from 'react-bootstrap';
 import { withRouter } from "react-router";
 import * as serviceWorker from './serviceWorker';
 import Menubar from './Menubar';
 import Bookings from './Bookings';
+import MeetingRooms from './MeetingRooms';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
+import logo from "./MeetingRooms/largeConference.jpg"
 
 ReactDOM.render(
   <React.StrictMode>   
-    <Menubar />
+    <Bookings />
   </React.StrictMode>,
   document.getElementById('root')
 );
