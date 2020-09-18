@@ -1,0 +1,6 @@
+.pagination .react-bootstrap-table-page-btns-ul { float: right!important }
+.react-bootstrap-table-pagination-list {float: right!important}
+.statusButton {
+    margin-left:5px;
+    float: right;
+  }

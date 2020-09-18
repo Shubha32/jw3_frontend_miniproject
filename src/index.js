@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {Container,Row, Col} from 'react-bootstrap';
+import { withRouter } from "react-router";
 import * as serviceWorker from './serviceWorker';
+import Menubar from './Menubar';
+import Bookings from './Bookings';
+import 'bootstrap/dist/css/bootstrap.css';
+import './index.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
+  <React.StrictMode>   
+    <Menubar />
   </React.StrictMode>,
   document.getElementById('root')
 );
